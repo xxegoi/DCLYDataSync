@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DYJXCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="t_HK_PGData">
+          <Key>
+            <PropertyRef Name="batch_no" />
+          </Key>
+          <Property Name="batch_no" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="colour_name" Type="varchar" MaxLength="800" />
+          <Property Name="lab_dip_ref" Type="varchar" MaxLength="800" />
+          <Property Name="division" Type="varchar" MaxLength="255" />
+          <Property Name="customer" Type="varchar" MaxLength="255" />
+          <Property Name="fabric_desc" Type="varchar" MaxLength="1000" />
+          <Property Name="yarn_desc" Type="varchar" MaxLength="1000" />
+          <Property Name="weight" Type="varchar" MaxLength="255" />
+          <Property Name="width" Type="varchar" MaxLength="255" />
+          <Property Name="finishing" Type="text" />
+          <Property Name="qty" Type="numeric" Precision="16" Scale="6" />
+          <Property Name="no_of_roll" Type="int" />
+          <Property Name="production_desc" Type="text" />
+          <Property Name="IsSync" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DYJXCModelStoreContainer">
+          <EntitySet Name="t_HK_PGData" EntityType="Self.t_HK_PGData" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DYJXCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="t_HK_PGData">
+          <Key>
+            <PropertyRef Name="batch_no" />
+          </Key>
+          <Property Name="batch_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="colour_name" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Name="lab_dip_ref" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Name="division" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="customer" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="fabric_desc" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="yarn_desc" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="weight" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="width" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="finishing" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="qty" Type="Decimal" Precision="16" Scale="6" />
+          <Property Name="no_of_roll" Type="Int32" />
+          <Property Name="production_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsSync" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DYJXCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="t_HK_PGData" EntityType="Self.t_HK_PGData" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DYJXCModelStoreContainer" CdmEntityContainer="DYJXCEntities">
+          <EntitySetMapping Name="t_HK_PGData">
+            <EntityTypeMapping TypeName="DYJXCModel.t_HK_PGData">
+              <MappingFragment StoreEntitySet="t_HK_PGData">
+                <ScalarProperty Name="batch_no" ColumnName="batch_no" />
+                <ScalarProperty Name="colour_name" ColumnName="colour_name" />
+                <ScalarProperty Name="lab_dip_ref" ColumnName="lab_dip_ref" />
+                <ScalarProperty Name="division" ColumnName="division" />
+                <ScalarProperty Name="customer" ColumnName="customer" />
+                <ScalarProperty Name="fabric_desc" ColumnName="fabric_desc" />
+                <ScalarProperty Name="yarn_desc" ColumnName="yarn_desc" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="finishing" ColumnName="finishing" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="no_of_roll" ColumnName="no_of_roll" />
+                <ScalarProperty Name="production_desc" ColumnName="production_desc" />
+                <ScalarProperty Name="IsSync" ColumnName="IsSync" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
