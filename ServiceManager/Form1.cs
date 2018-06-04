@@ -27,6 +27,17 @@ namespace ServiceManager
 
         bool run = true;
         Thread t1=null;
+        private ContextMenu notifyiconMenu;
+
+        private void InitializenotifyiconMenu()
+        {
+            List<MenuItem> items = new List<MenuItem>();
+            MenuItem item = new MenuItem("退出");
+            item.Click += new EventHandler(this.Exit);
+            items.Add(item);
+            this.notifyiconMenu = new ContextMenu(items.ToArray());
+            this.notifyIcon1.ContextMenu = notifyiconMenu;
+        }
 
         private void btn_Start_Click(object sender, EventArgs e)
         {
@@ -34,12 +45,15 @@ namespace ServiceManager
             this.btn_Start.Enabled = false;
             t1 = new Thread(ServiceStart);
             this.t1.Start();
+            this.btn_Stop.Enabled = true;
+            this.btn_Start.Enabled = false;
         }
 
         private void btn_Stop_Click(object sender, EventArgs e)
         {
-            this.t1.Abort();
+            if(this.t1!=null&&this.t1.IsAlive) this.t1.Abort();
             this.btn_Start.Enabled = true;
+            this.btn_Stop.Enabled = false;
             LogHandler.Log("停止同步数据");
         }
 
@@ -152,7 +166,47 @@ namespace ServiceManager
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.btn_Stop_Click(sender,e);
+            this.ShowInTaskbar = false;
+            this.Hide();
+            if (this.t1 != null && this.t1.IsAlive)
+            {
+                this.t1.Abort();
+            }
         }
+
+        private void Exit(object sender,EventArgs e)
+        {
+            if (this.t1 != null && this.t1.IsAlive)
+            {
+                this.t1.Abort();
+            }
+
+            this.Close();
+            this.Dispose();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
+        }
+
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.notifyIcon1.Visible = true;
+                this.ShowInTaskbar = false;
+                this.InitializenotifyiconMenu();
+            }
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.notifyIcon1.Visible = false;
+            this.WindowState = FormWindowState.Normal;
+            this.ShowInTaskbar = true;
+        }
+
+        
     }
 }
