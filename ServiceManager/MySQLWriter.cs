@@ -35,7 +35,7 @@ namespace ServiceManager
                 }
                 catch (Exception ex)
                 {
-                    message += message + "结果：失败\r\n" + "原因：" + ex.Message;
+                    message += message + "结果：失败\r\n" + "原因：" + ex.Message+"\r\n";
                     LogHandler.Error(message);
                 }
                 
@@ -61,7 +61,7 @@ namespace ServiceManager
                 }
                 catch (Exception ex)
                 {
-                    message += message + "结果：失败\r\n" + "原因：" + ex.Message;
+                    message += message + "结果：失败\r\n" + "原因：" + ex.Message+"\r\n";
                     LogHandler.Error(message);
                 }
 

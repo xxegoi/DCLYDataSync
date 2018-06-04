@@ -80,8 +80,11 @@ namespace ServiceManager
             while (run)
             {
                 var dataList = Check();
-                var list = DataSync(dataList);
-                if (list.Count > 0) { WriteBack(list); }
+                if (dataList != null)
+                {
+                    var list = DataSync(dataList);
+                    if (list.Count > 0) { WriteBack(list); }
+                }
 
                 var intervalStr = ConfigurationManager.AppSettings["Interval"];
                 ConfigurationManager.RefreshSection("appSettings");
@@ -126,8 +129,12 @@ namespace ServiceManager
 
             list.ForEach(p =>
             {
-                count += db.Insert(p);
-                result.Add(p.batch_no);
+                var row = db.Insert(p);
+                if (row > 0)
+                {
+                    count += row;
+                    result.Add(p.batch_no);
+                }
             });
 
             LogHandler.Log(string.Format("本次共同步{0}条数据", count));
@@ -171,14 +178,16 @@ namespace ServiceManager
             if (this.t1 != null && this.t1.IsAlive)
             {
                 this.t1.Abort();
+                
             }
         }
 
         private void Exit(object sender,EventArgs e)
         {
-            if (this.t1 != null && this.t1.IsAlive)
+            if (this.t1 != null)
             {
                 this.t1.Abort();
+                
             }
 
             this.Close();
